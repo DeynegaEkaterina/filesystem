@@ -71,11 +71,13 @@ void Analyzer::full_vector(std::string broker,
     _lastdate.push_back(std::stoi(data));
   }else if (_broker[index] == broker){
     ++_files[index];
-    _lastdate[index] = (_lastdate[index] > std::stoi(data))?
-                       _lastdate[index]:std::stoi(data);
-  }
-  else{
-    throw std::runtime_error("Two owners per account");
+    if (_lastdate[index] > std::stoi(data)){
+      _lastdate[index] = _lastdate[index];
+    }
+       else
+    {
+      _lastdate[index] = std::stoi(data);
+    }
   }
 }
 
